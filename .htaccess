@@ -1,0 +1,16 @@
+DirectoryIndex index.php
+
+# enable apache rewrite
+RewriteEngine on
+
+# set write base
+
+RewriteBase /
+
+# delvery folder if exist
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# push every request to index
+RewriteRule ^(.*)$ index.php [QSA]
