@@ -25,8 +25,9 @@
             "ConfigurationSetting\\": "Core/ConfigurationSetting/",
             "Mailling\\": "Core/Mailling/",
             "Assest\\": "Core/Assest/",
-            "DynamicTables\\": "Core/Datainterface/",
-            "CrudClassCollection\\" : "Core/Datainterface"
+            "CrudClassCollection\\" : "Core/Datainterface",
+            "Installer\\" : "Core/Installer",
+            "FileHandler\\": "Core/FileHandler"
         }
     }
 }

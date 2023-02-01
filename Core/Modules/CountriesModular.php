@@ -49,7 +49,7 @@ class CountriesModular
 
    public static function getCountryName($code){
        $con = Database::database();
-       $stmt = $con->prepare("SELECT name as country FROM {tbl_countries} WHERE sortname = :code");
+       $stmt = $con->prepare("SELECT name as country FROM tbl_countries WHERE sortname = :code");
        $stmt->bindParam(':code', $code);
        $stmt->execute();
 

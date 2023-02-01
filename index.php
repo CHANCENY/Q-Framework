@@ -8,10 +8,12 @@ use Core\Router;
 use Datainterface\Database;
 use Datainterface\Tables;
 use MiddlewareSecurity\Security;
-use Sessions\SessionManager;
+
 
 
 @session_start();
+
+Database::installer();
 
 $security = new Security();
 $user= $security->checkCurrentUser();
@@ -30,6 +32,7 @@ $connection = Database::database();
 if(!Tables::tablesExists()){
     Tables::installTableRequired();
 }
+
 ?>
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">

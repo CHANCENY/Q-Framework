@@ -5,6 +5,7 @@ namespace Core;
 use Alerts\Alerts;
 use MiddlewareSecurity\Security;
 use Modules\SettingWeb;
+use Sessions\SessionManager;
 
 @session_start();
 class Router
@@ -171,11 +172,14 @@ class Router
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $host = parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
         $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+
         parse_str($query, $list);
         $queryList = isset($list) ? $list : [];
 
         $path = $path[strlen($path)-1] === '/' ? substr($path, 1, strlen($path) - 2) : substr($path, 1, strlen($path));
-
+        if(SessionManager::getSession('site') === false){
+            $path = 'registration';
+        }
         $storage = 'Core/Router/Register/registered_path_available.json';
         $foundView = [];
         if(file_exists($storage)){

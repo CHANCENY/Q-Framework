@@ -1,9 +1,9 @@
 <?php
-namespace DynamicTables;
-/**
- * Making dynamic tables
- */
-class TableCreator{
+
+namespace Datainterface;
+
+class MysqlDynamicTables
+{
 
     /**
      * columnNames holds names of columns to be made in tablr
@@ -32,7 +32,7 @@ class TableCreator{
      */
     private $connection;
 
-    
+
     /**
      * constructor randomly give name of table to tableName attribute
      * in case table name wont be manually provide by programmer
@@ -51,12 +51,12 @@ class TableCreator{
     public function setColumnNames($cols = []){
         $this->columnNames = $cols;
     }
-    
+
     /**
      * Set table name
      */
     public function setTableName($tableName = ""){
-       $this->tableName = empty($tableName) ? uniqid() : $tableName;
+        $this->tableName = empty($tableName) ? uniqid() : $tableName;
     }
 
     /**
@@ -87,7 +87,7 @@ class TableCreator{
     private function runChecker(){
 
         if(count($this->columnNames) !== count($this->attributes)){
-             return false;
+            return false;
         }
         return true;
     }
@@ -96,14 +96,14 @@ class TableCreator{
      * Making columns attribute and sql query line
      */
     private function creation(){
-        
+
         $columnString = $this->useDefauiltPrimary === true ? "(rowid INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, "  : "(";
         $counter = 0;
-        foreach($this->columnNames as $col){  
-           $columnString .= $col." ".$this->lineAttributes($col).", ";
+        foreach($this->columnNames as $col){
+            $columnString .= $col." ".$this->lineAttributes($col).", ";
         }
         $columnString .= 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)';
-        
+
         $completeSql = "CREATE TABLE IF NOT EXISTS ".$this->tableName." ".$columnString;
         return $completeSql;
 
@@ -118,11 +118,11 @@ class TableCreator{
         $thisColumn = $this->attributes[$col];
 
         foreach($thisColumn as $attr){
-            $attributeLine .= $attr." ";        
+            $attributeLine .= $attr." ";
         }
-      return $attributeLine;
+        return $attributeLine;
     }
-   
+
     /**
      * Making table in databses
      */
@@ -132,7 +132,7 @@ class TableCreator{
             $stmtss = $this->connection->prepare($sql);
             if($stmtss->execute()){
                 return true;
-            }     
+            }
             return false;
         }
     }
@@ -141,29 +141,29 @@ class TableCreator{
      * table exist
      */
     public function tableExist(){
-         
+
         $sl = "SHOW TABLES FROM epiz_33271157_storagecollection";
         $stmt = $this->connection->prepare($sl);
         if($stmt->execute()){
-            
+
             $d = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             if(!empty($d)){
                 foreach($d as $t){
-                  extract($t);
-                  if($Tables_in_epiz_33271157_storagecollection === $this->tableName){
-                    return true;
-                  }
+                    extract($t);
+                    if($Tables_in_epiz_33271157_storagecollection === $this->tableName){
+                        return true;
+                    }
                 }
             }
         }
         return false;
-        
+
     }
 
     /**
      * Creation of table lapper this to be called after all required
-     * columns and attribute have been set 
-     * this function will run runchecker, creation, runSql method to 
+     * columns and attribute have been set
+     * this function will run runchecker, creation, runSql method to
      * give out table in db and will return true if table created or false
      * if not
      */
@@ -191,7 +191,7 @@ class TableCreator{
 
     /**
      * lapper around all required to be set and  calls for create method
-     * to make table in database all at once 
+     * to make table in database all at once
      * NOTE this is shortcut of you called all setter own your own
      * return TRUE if table made or FALSE if not made.
      */
@@ -207,6 +207,3 @@ class TableCreator{
     }
 
 }
-
-
-?>

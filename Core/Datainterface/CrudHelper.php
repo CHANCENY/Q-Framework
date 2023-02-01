@@ -1,12 +1,9 @@
 <?php
-namespace CrudClassCollection;
-use Datainterface\Database;
 
-/**
- * This file contains class having all crud operation
- * methods
- */
-class Module{
+namespace Datainterface;
+
+class CrudHelper
+{
 
     /**
      * connection variable
@@ -34,7 +31,7 @@ class Module{
     private $table;
 
     /**
-     * constructor to initialize connection 
+     * constructor to initialize connection
      */
     public function __construct()
     {
@@ -89,7 +86,7 @@ class Module{
             case 'value':
                 # code...
                 break;
-            
+
             default:
                 # code...
                 break;
@@ -100,7 +97,7 @@ class Module{
      * insertion
      */
     public function insertion(){
-        
+
         $TABLE = $this->table;
         $queryLine = "";
         foreach($this->columns as $column){
@@ -150,30 +147,30 @@ class Module{
         $condition = trim($condition);
         $condition = trim(substr($condition, 0, strlen($condition) - 3));
 
-    
+
         $dataline = "";
         for($i = 0; $i < count($this->columns); $i++){
             $dataline .= $this->columns[$i]. " = :".$this->columns[$i]." , ";
-            }
+        }
         $dataline = trim(substr($dataline, 0, strlen($dataline) - 2));
         $sqlline = "UPDATE ".$TABLE." SET ".$dataline." WHERE ".$condition;
         $sqlline = trim($sqlline);
-        
+
         $stmt = $this->connection->prepare($sqlline);
         for($i = 0; $i < count($this->columns); $i++){
-            
+
             $stmt->bindParam(":".$this->columns[$i]."", $this->data[$i]);
         }
-        
+
         for($i = 0; $i < count($col); $i++){
-            
+
             $stmt->bindParam(":".$col[$i]."", $colKey[$col[$i]]);
         }
-         
+
         if($stmt->execute()){
             return TRUE;
         }
-        
+
         return FALSE;
     }
 
@@ -198,7 +195,7 @@ class Module{
         $stmt = $this->connection->prepare($sql);
 
         for($i = 0; $i < count($col); $i++){
-            
+
             $stmt->bindParam(":".$col[$i]."", $colKey[$col[$i]]);
         }
 
@@ -206,14 +203,14 @@ class Module{
             return TRUE;
         }
         return FaLSE;
-        
+
     }
 
     /**
      * select functions below
      */
     public function selectAll(){
-        
+
         $sql = "SELECT * FROM ".$this->table;
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
@@ -242,7 +239,7 @@ class Module{
         $stmt = $this->connection->prepare($sql);
 
         for($i = 0; $i < count($col); $i++){
-            
+
             $stmt->bindParam(":".$col[$i]."", $colKey[$col[$i]]);
         }
 
@@ -252,7 +249,7 @@ class Module{
         }
         return FaLSE;
     }
-    
+
     /**
      * addition method
      */
@@ -261,7 +258,7 @@ class Module{
         if(empty($data)){
             return NULL;
         }
-       
+
         $xml = "<".$table.">";
         foreach($data as $collect){
 

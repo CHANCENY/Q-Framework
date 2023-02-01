@@ -3,6 +3,7 @@
 namespace Datainterface;
 
 use Alerts\Alerts;
+use Sessions\SessionManager;
 
 class Database
 {
@@ -86,6 +87,74 @@ class Database
        }catch (\PDOException $e){
            echo Alerts::alert('info',$e->getMessage());
            die();
+       }
+   }
+
+   public static function installer(){
+
+       $con = self::database();
+
+       $maker = new MysqlDynamicTables();
+       $columns = ['uid','firstname','lastname','mail','phone','password','address','role','verified','blocked'];
+       $attributes = [
+         'uid'=>['INT(11)','AUTO_INCREMENT','PRIMARY KEY'],
+         'firstname'=>['VARCHAR(100)','NOT NULL'],
+         'lastname'=>['VARCHAR(100)', 'NOT NULL'],
+         'mail'=>['VARCHAR(100)','NOT NULL'],
+         'phone'=>['VARCHAR(20)', 'NULL'],
+           'password'=>['VARCHAR(100)', 'NOT NULL'],
+         'address'=>['TEXT','NULL'],
+         'role'=>['VARCHAR(20)','NOT NULL'],
+           'verified'=>['BOOLEAN'],
+           'blocked'=>['BOOLEAN']
+       ];
+
+       $maker->resolver($con,$columns,$attributes,'users',false);
+
+       try{
+           $conn = self::database();
+           $stmt = $conn->prepare("SELECT 1 FROM tbl_cities LIMIT 1");
+           $stmt->execute();
+       }catch (\Exception $e){
+
+         $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/tbl_cities.sql';
+         self::importTable($path);
+       }
+
+       try{
+           $conn = self::database();
+           $stmt = $conn->prepare("SELECT 1 FROM tbl_countries LIMIT 1");
+           $stmt->execute();
+       }catch (\Exception $e){
+
+           $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/tbl_countries.sql';
+           self::importTable($path);
+       }
+
+       try{
+           $conn = self::database();
+           $stmt = $conn->prepare("SELECT 1 FROM tbl_states LIMIT 1");
+           $stmt->execute();
+       }catch (\Exception $e){
+
+           $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/tbl_states.sql';
+           self::importTable($path);
+       }
+
+       $user = Selection::selectById('users', ['role'=>'Admin']);
+       if(empty($user)){
+           SessionManager::setSession('site', false);
+       }else{
+           SessionManager::setSession('site', true);
+       }
+   }
+
+   public static function importTable($file){
+       $con = self::database();
+       $query = file_get_contents($file);
+       if(!empty($query)){
+          $stmt = $con->prepare($query);
+           return $stmt->execute();
        }
    }
 }

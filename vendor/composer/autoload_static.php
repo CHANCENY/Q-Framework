@@ -22,6 +22,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
             'Manipulator\\' => 12,
             'Mailling\\' => 9,
         ),
+        'I' => 
+        array (
+            'Installer\\' => 10,
+        ),
         'G' => 
         array (
             'GlobalsFunctions\\' => 17,
@@ -29,10 +33,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'F' => 
         array (
             'FormViewCreation\\' => 17,
+            'FileHandler\\' => 12,
         ),
         'D' => 
         array (
-            'DynamicTables\\' => 14,
             'Datainterface\\' => 14,
         ),
         'C' => 
@@ -73,6 +77,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/Mailling',
         ),
+        'Installer\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Installer',
+        ),
         'GlobalsFunctions\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Globals',
@@ -81,9 +89,9 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/Forms',
         ),
-        'DynamicTables\\' => 
+        'FileHandler\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/Core/Datainterface',
+            0 => __DIR__ . '/../..' . '/Core/FileHandler',
         ),
         'Datainterface\\' => 
         array (

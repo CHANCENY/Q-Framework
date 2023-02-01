@@ -20,6 +20,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
        $country = \Modules\CountriesModular::getCountryName(htmlspecialchars(strip_tags($_POST['country'])));
        $address = $country.', '.htmlspecialchars(strip_tags($_POST['state'])).', '.
            htmlspecialchars(strip_tags($_POST['city'])).', '.htmlspecialchars(strip_tags($_POST['zip']));
+       $site = \Sessions\SessionManager::getSession('site');
+
         $data = [
                 "firstname"=>htmlspecialchars(strip_tags($_POST['firstname'])),
                 "lastname"=>htmlspecialchars(strip_tags($_POST['lastname'])),
@@ -27,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                "password"=>htmlspecialchars($_POST['password']),
                "phone"=>htmlspecialchars(strip_tags($_POST['phone'])),
                "address"=>$address,
-               "role"=>"unverified"
+               "role"=> $site === false ? "Admin" : "user"
         ];
 
         $check = \Datainterface\Selection::selectById('users', ['mail'=>htmlspecialchars(strip_tags($_POST['email']))]);
@@ -36,6 +38,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             $user = \Datainterface\Insertion::insertRow('users', $data);
             if(!empty($user)){
                 echo \Alerts\Alerts::alert('info', "User created {$_POST['firstname']}");
+                \Sessions\SessionManager::setSession('site', true);
+                echo '<META HTTP-EQUIV="Refresh" Content="1; URL=/">';
             }else{
                 echo \Alerts\Alerts::alert('danger', "Failed to create user");
             }

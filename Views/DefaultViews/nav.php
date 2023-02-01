@@ -19,7 +19,7 @@ foreach ($menus as $menu){
   <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <?php \Assest\Assest::loadStyleSheets(); ?>
-    <title id="titlepage">Blog</title>
+    <title id="titlepag"><?php echo \GlobalsFunctions\Globals::titleView(); ?></title>
 </head>
 <body class="h-full">
 <!--
