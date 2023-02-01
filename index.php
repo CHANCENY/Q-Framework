@@ -3,6 +3,7 @@ namespace index;
 require_once  __DIR__.'/vendor/autoload.php';
 
 use Alerts\Alerts;
+use Assest\Assest;
 use Core\Router;
 use Datainterface\Database;
 use Datainterface\Tables;
@@ -43,7 +44,9 @@ if(!Tables::tablesExists()){
         }
         ?>
     </div>
-    <script src="./Js/main.js"></script>
+    <?php
+      Assest::loadJavaScript("js");
+    ?>
 </main>
 <?php
 

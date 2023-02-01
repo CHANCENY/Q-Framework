@@ -32,15 +32,18 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         ),
         'D' => 
         array (
+            'DynamicTables\\' => 14,
             'Datainterface\\' => 14,
         ),
         'C' => 
         array (
+            'CrudClassCollection\\' => 20,
             'Core\\' => 5,
             'ConfigurationSetting\\' => 21,
         ),
         'A' => 
         array (
+            'Assest\\' => 7,
             'Alerts\\' => 7,
         ),
     );
@@ -78,7 +81,15 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/Forms',
         ),
+        'DynamicTables\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Datainterface',
+        ),
         'Datainterface\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Datainterface',
+        ),
+        'CrudClassCollection\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Datainterface',
         ),
@@ -89,6 +100,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'ConfigurationSetting\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/ConfigurationSetting',
+        ),
+        'Assest\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Assest',
         ),
         'Alerts\\' => 
         array (

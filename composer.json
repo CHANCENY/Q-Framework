@@ -23,7 +23,10 @@
             "Manipulator\\": "Views/DefaultViews/",
             "Sessions\\": "Core/Sessions/",
             "ConfigurationSetting\\": "Core/ConfigurationSetting/",
-            "Mailling\\": "Core/Mailling/"
+            "Mailling\\": "Core/Mailling/",
+            "Assest\\": "Core/Assest/",
+            "DynamicTables\\": "Core/Datainterface/",
+            "CrudClassCollection\\" : "Core/Datainterface"
         }
     }
 }

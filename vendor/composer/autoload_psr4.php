@@ -14,8 +14,11 @@ return array(
     'Mailling\\' => array($baseDir . '/Core/Mailling'),
     'GlobalsFunctions\\' => array($baseDir . '/Core/Globals'),
     'FormViewCreation\\' => array($baseDir . '/Core/Forms'),
+    'DynamicTables\\' => array($baseDir . '/Core/Datainterface'),
     'Datainterface\\' => array($baseDir . '/Core/Datainterface'),
+    'CrudClassCollection\\' => array($baseDir . '/Core/Datainterface'),
     'Core\\' => array($baseDir . '/Core/Router/RouterController'),
     'ConfigurationSetting\\' => array($baseDir . '/Core/ConfigurationSetting'),
+    'Assest\\' => array($baseDir . '/Core/Assest'),
     'Alerts\\' => array($baseDir . '/Core/Alerts'),
 );
