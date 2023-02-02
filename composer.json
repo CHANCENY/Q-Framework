@@ -27,7 +27,10 @@
             "Assest\\": "Core/Assest/",
             "CrudClassCollection\\" : "Core/Datainterface",
             "Installer\\" : "Core/Installer",
-            "FileHandler\\": "Core/FileHandler"
+            "FileHandler\\": "Core/FileHandler",
+            "ApiHandler\\" : "Core/ApiHandler/",
+            "ResponseHandler\\" : "Core/ApiHandler/",
+            "Commerce\\": "Core/Commerce/"
         }
     }
 }

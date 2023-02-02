@@ -39,4 +39,51 @@ class FileHandler
 
       }
   }
+
+
+  public static function deleteFile($filename){
+      if(empty($filename)){
+          return false;
+      }
+
+      $base = $_SERVER['DOCUMENT_ROOT'].'/Files';
+      if(is_dir($base)){
+          $fileList = scandir($base);
+
+          foreach ($fileList as $file){
+              if($file === $filename){
+                 return unlink($base.'/'.$filename);
+              }
+          }
+      }
+  }
+
+  public static function renameFile($oldname, $newname){
+      if(empty($newname) || empty($oldname)){
+          return false;
+      }
+      return rename($_SERVER['DOCUMENT_ROOT'].'/Files/'.$oldname, $_SERVER['DOCUMENT_ROOT'].'/Files/'.$newname);
+}
+
+  public static function findFile($filname, $type = 'absolute'){
+      if(empty($filname)){
+          return false;
+      }
+      $base = $_SERVER['DOCUMENT_ROOT'].'/Files';
+
+      if(is_dir($base)){
+          $fileList = scandir($base);
+          foreach ($fileList as $file){
+              if($file === $filname){
+                  if($type === "absolute"){
+                      return $_SERVER['DOCUMENT_ROOT'].'/Files/'.$filname;
+                  }else{
+                      return 'Files/'.$filname;
+                  }
+              }
+          }
+      }
+  }
+
+
 }

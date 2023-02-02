@@ -10,7 +10,7 @@ class HelperClass extends Database
     public static function checkColumnsMatch($tableName = [], $data = []) : bool{
         $cols = Tables::tableSchemaInfo($tableName);
 
-        $moduleDefinitons = MakerModular::$tableSchemas[$tableName];
+       // $moduleDefinitons = MakerModular::$tableSchemas[$tableName];
         return true;
 
         $flag = 0;

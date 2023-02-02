@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Sessions\\' => array($baseDir . '/Core/Sessions'),
+    'ResponseHandler\\' => array($baseDir . '/Core/ApiHandler'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Modules\\' => array($baseDir . '/Core/Modules'),
     'MiddlewareSecurity\\' => array($baseDir . '/Core/Middleware'),
@@ -20,6 +21,8 @@ return array(
     'CrudClassCollection\\' => array($baseDir . '/Core/Datainterface'),
     'Core\\' => array($baseDir . '/Core/Router/RouterController'),
     'ConfigurationSetting\\' => array($baseDir . '/Core/ConfigurationSetting'),
+    'Commerce\\' => array($baseDir . '/Core/Commerce'),
     'Assest\\' => array($baseDir . '/Core/Assest'),
+    'ApiHandler\\' => array($baseDir . '/Core/ApiHandler'),
     'Alerts\\' => array($baseDir . '/Core/Alerts'),
 );

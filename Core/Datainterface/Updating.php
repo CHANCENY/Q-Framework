@@ -2,20 +2,14 @@
 
 namespace Datainterface;
 
-class Updating extends Database
+class Updating
 {
     public static function update($tableName, $data = [], $keyValue = []): bool{
-        $con = self::database();
-        if(HelperClass::checkColumnsMatch($tableName, $data)){
-            $query = "UPDATE TABLE {$tableName} SET ".HelperClass::lineSetQuery($data);
-            $cond = HelperClass::lineSetQuery($keyValue);
-            $query .= ' '.$cond;
-            $stmt = HelperClass::binding($query.$cond,$data);
-            if(HelperClass::runQuery($stmt)){
-                return true;
-            }
-        }
-        return false;
+        $helper = new CrudHelper();
+        $helper->putData($data);
+        $helper->setTableName($tableName);
+        return $helper->updates($keyValue);
+
     }
 
 }

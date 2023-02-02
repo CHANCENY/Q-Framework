@@ -11,6 +11,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             'Sessions\\' => 9,
         ),
+        'R' => 
+        array (
+            'ResponseHandler\\' => 16,
+        ),
         'P' => 
         array (
             'PHPMailer\\PHPMailer\\' => 20,
@@ -44,10 +48,12 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
             'CrudClassCollection\\' => 20,
             'Core\\' => 5,
             'ConfigurationSetting\\' => 21,
+            'Commerce\\' => 9,
         ),
         'A' => 
         array (
             'Assest\\' => 7,
+            'ApiHandler\\' => 11,
             'Alerts\\' => 7,
         ),
     );
@@ -56,6 +62,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'Sessions\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Sessions',
+        ),
+        'ResponseHandler\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/ApiHandler',
         ),
         'PHPMailer\\PHPMailer\\' => 
         array (
@@ -109,9 +119,17 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/ConfigurationSetting',
         ),
+        'Commerce\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Commerce',
+        ),
         'Assest\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Assest',
+        ),
+        'ApiHandler\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/ApiHandler',
         ),
         'Alerts\\' => 
         array (
