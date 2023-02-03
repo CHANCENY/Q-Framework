@@ -4,9 +4,17 @@
 $menus = \GlobalsFunctions\Globals::menus();
 
 $links = "";
+$sec = new \MiddlewareSecurity\Security();
+$user = $sec->checkCurrentUser();
 foreach ($menus as $menu){
     $m = "<a href='{$menu['view_url']}' class='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>{$menu['view_name']}</a>";
     $links .= $m;
+}
+if($user === "U-NULL"){
+    $links = "";
+}
+if($user === "U-COMMON"){
+    $links = "";
 }
 ?>
 <!doctype html>
@@ -19,7 +27,7 @@ foreach ($menus as $menu){
   <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <?php \Assest\Assest::loadStyleSheets(); ?>
-    <title id="titlepag"><?php echo \GlobalsFunctions\Globals::titleView(); ?></title>
+    <title id="titlepage"><?php echo \GlobalsFunctions\Globals::titleView(); ?></title>
 </head>
 <body class="h-full">
 <!--

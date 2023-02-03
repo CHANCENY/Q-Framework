@@ -33,19 +33,26 @@ class Globals
   public static function menus(){
 
       $menus = [];
-     foreach ($_SESSION['viewsstorage'] as $view){
-         if($view['view_role_access'] === 'administrator'){
-            $menus[] = $view;
-         }
-     }
+      if(isset($_SESSION['viewsstorage'])){
+          foreach ($_SESSION['viewsstorage'] as $view){
+              if($view['view_role_access'] === 'administrator'){
+                  $menus[] = $view;
+              }
+          }
+      }
+
      return $menus;
   }
 
   public static function findViewByUrl($url){
-      foreach ($_SESSION['viewsstorage'] as $view){
-          if($view['view_url'] === $url){
-              return $view;
+
+      if(isset($_SESSION['viewsstorage'])){
+          foreach ($_SESSION['viewsstorage'] as $view){
+              if($view['view_url'] === $url){
+                  return $view;
+              }
           }
       }
+
   }
 }

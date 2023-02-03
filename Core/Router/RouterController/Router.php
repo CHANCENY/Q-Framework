@@ -3,6 +3,7 @@
 namespace Core;
 
 use Alerts\Alerts;
+use ConfigurationSetting\ConfigureSetting;
 use MiddlewareSecurity\Security;
 use Modules\SettingWeb;
 use Sessions\SessionManager;
@@ -169,78 +170,95 @@ class Router
 
     public static function router($restricstionLevel = false){
 
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $host = parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
-        $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+        if(!empty(ConfigureSetting::getDatabaseConfig())) {
+            $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+            $host = parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
+            $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 
-        parse_str($query, $list);
-        $queryList = isset($list) ? $list : [];
+            parse_str($query, $list);
+            $queryList = isset($list) ? $list : [];
 
-        $path = $path[strlen($path)-1] === '/' ? substr($path, 1, strlen($path) - 2) : substr($path, 1, strlen($path));
-        if(SessionManager::getSession('site') === false){
-            $path = 'registration';
-        }
-        $storage = 'Core/Router/Register/registered_path_available.json';
-        $foundView = [];
-        if(file_exists($storage)){
-            $views = json_decode(file_get_contents($storage), true);
-            $_SESSION['viewsstorage'] = $views;
-            foreach($views as $view){
-              if(strtolower($path) === strtolower($view['view_url'])){
-                  $foundView = $view;
-                  break;
-              }
+            $path = $path[strlen($path) - 1] === '/' ? substr($path, 1, strlen($path) - 2) : substr($path, 1, strlen($path));
+            if (SessionManager::getSession('site') === false) {
+                $path = 'registration';
             }
-            $data = [
-                "host"=>$host,
-                "path"=>$path,
-                "query"=>$query,
-                "params"=>$queryList,
-                "view"=>$foundView
-            ];
-            $_SESSION['public_data']=$data;
-            if(!empty($foundView)){
-
-                if($restricstionLevel === true){
-                    $security = new Security();
-                    $access = $security->checkViewAccess();
-
-                    if($access === "V-NULL"){
-                        $_SESSION['message']['route'] = "Page looking for is unreachable at moment";
-                    }elseif($access === "V-PRIVATE"){
-                        $user = $security->checkCurrentUser();
-                        if($user === "U-Admin"){
-                            $_SESSION['access']['role'] = 1;
-                            self::requiringFile($foundView);
-                        }elseif($user === "U-BLOCKED"){
-                            $_SESSION['message']['route'] = "Sorry your account is blocked by authority if this is misunderstand please contact administrator";
-                        }elseif ($user === "V-VERIFIED"){
-                            self::requiringFile($foundView);
-                        }else{
-                            $_SESSION['message']['route'] = "Page is private your are not allowed here";
-                        }
-                    }else{
-                       self::requiringFile($foundView);
+            $storage = 'Core/Router/Register/registered_path_available.json';
+            $foundView = [];
+            if (file_exists($storage)) {
+                $views = json_decode(file_get_contents($storage), true);
+                $_SESSION['viewsstorage'] = $views;
+                foreach ($views as $view) {
+                    if (strtolower($path) === strtolower($view['view_url'])) {
+                        $foundView = $view;
+                        break;
                     }
-                }else{
-                    self::requiringFile($foundView);
                 }
-            }else{
-                if($path === '/' || empty($path)){
-                  $foundView = self::findHomePage();
-                  if(!empty($foundView)){
-                      self::requiringFile($foundView);
-                  }else{
-                      $_SESSION['message']['route'] ="404 view not found with url ({$path} ) in system visit <a href='creating-view'>Create view</a> also you can view list of all your views registered visit <a href='my-views'>Views list</a>";
-                  }
-                }else{
-                    $_SESSION['message']['route'] ="404 view not found with url ({$path} ) in system visit <a href='creating-view'>Create view</a> also you can view list of all your views registered visit <a href='my-views'>Views list</a>";
+                $data = [
+                    "host" => $host,
+                    "path" => $path,
+                    "query" => $query,
+                    "params" => $queryList,
+                    "view" => $foundView
+                ];
+                $_SESSION['public_data'] = $data;
+                if (!empty($foundView)) {
+
+                    if ($restricstionLevel === true) {
+                        $security = new Security();
+                        $access = $security->checkViewAccess();
+
+                        if ($access === "V-NULL") {
+                            $_SESSION['message']['route'] = "Page looking for is unreachable at moment";
+                        } elseif ($access === "V-PRIVATE") {
+                            $user = $security->checkCurrentUser();
+                            if ($user === "U-Admin") {
+                                $_SESSION['access']['role'] = 1;
+                                self::requiringFile($foundView);
+                            } elseif ($user === "U-BLOCKED") {
+                                $_SESSION['message']['route'] = "Sorry your account is blocked by authority if this is misunderstand please contact administrator";
+                            } elseif ($user === "V-VERIFIED") {
+                                self::requiringFile($foundView);
+                            } else {
+                                $_SESSION['message']['route'] = "Page is private your are not allowed here";
+                            }
+                        } else {
+                            self::requiringFile($foundView);
+                        }
+                    } else {
+                        self::requiringFile($foundView);
+                    }
+                } else {
+                    if ($path === '/' || empty($path)) {
+                        $foundView = self::findHomePage();
+                        if (!empty($foundView)) {
+                            self::requiringFile($foundView);
+                        } else {
+                            $_SESSION['message']['route'] = "404 view not found with url ({$path} ) in system visit <a href='creating-view'>Create view</a> also you can view list of all your views registered visit <a href='my-views'>Views list</a>";
+                        }
+                    } else {
+                        $_SESSION['message']['route'] = "404 view not found with url ({$path} ) in system visit <a href='creating-view'>Create view</a> also you can view list of all your views registered visit <a href='my-views'>Views list</a>";
+                    }
+                }
+
+            } else {
+                echo "View not found";
+                exit;
+            }
+        }else{
+            $storage = 'Core/Router/Register/registered_path_available.json';
+            $views = json_decode(file_get_contents($storage), true);
+            $foundView=[];
+            $_SESSION['viewsstorage'] = $views;
+            foreach ($views as $view) {
+                if (strtolower('installation') === strtolower($view['view_url'])) {
+                    $foundView = $view;
+                    break;
                 }
             }
 
-        }else{
-            echo "View not found";
-            exit;
+            if(!empty($foundView)){
+                self::requiringFile($foundView);
+            }
         }
     }
 

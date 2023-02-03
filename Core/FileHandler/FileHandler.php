@@ -2,6 +2,12 @@
 
 namespace FileHandler;
 
+use Datainterface\Database;
+use Datainterface\Delete;
+use Datainterface\Insertion;
+use Datainterface\MysqlDynamicTables;
+use Datainterface\Updating;
+
 class FileHandler
 {
   public static function saveFile($filename, $data, $type = "tmp"){
@@ -85,5 +91,27 @@ class FileHandler
       }
   }
 
+ public static function dbSavingFile($data){
+      $con = Database::database();
+      $columns = ['fid', 'filename','filesize','tmp'];
+      $attributes = [
+          'fid'=>['INT(11)','AUTO_INCREMENT','PRIMARY KEY'],
+          'filename'=>['VARCHAR(100)','NULL'],
+          'filesize'=>['INT(11)', 'NULL'],
+          'tmp'=>['LONG','BLOB']
+      ];
 
+      $maker = new MysqlDynamicTables();
+      $maker->resolver($con,$columns,$attributes,'file_managed',false);
+
+      return Insertion::insertRow('file_managed', $data);
+ }
+
+ public static function dbdeleteFile($keyValue){
+      return Delete::delete('file_managed', $keyValue);
+ }
+
+ public static function dbupdateFile($keyValue, $data){
+      return Updating::update('file_managed',$data, $keyValue);
+ }
 }

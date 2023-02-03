@@ -28,7 +28,7 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         ),
         'I' => 
         array (
-            'Installer\\' => 10,
+            'Installation\\' => 13,
         ),
         'G' => 
         array (
@@ -87,9 +87,9 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/Mailling',
         ),
-        'Installer\\' => 
+        'Installation\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/Core/Installer',
+            0 => __DIR__ . '/../..' . '/Core/Installation',
         ),
         'GlobalsFunctions\\' => 
         array (

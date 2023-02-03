@@ -13,7 +13,7 @@ return array(
     'MiddlewareSecurity\\' => array($baseDir . '/Core/Middleware'),
     'Manipulator\\' => array($baseDir . '/Views/DefaultViews'),
     'Mailling\\' => array($baseDir . '/Core/Mailling'),
-    'Installer\\' => array($baseDir . '/Core/Installer'),
+    'Installation\\' => array($baseDir . '/Core/Installation'),
     'GlobalsFunctions\\' => array($baseDir . '/Core/Globals'),
     'FormViewCreation\\' => array($baseDir . '/Core/Forms'),
     'FileHandler\\' => array($baseDir . '/Core/FileHandler'),

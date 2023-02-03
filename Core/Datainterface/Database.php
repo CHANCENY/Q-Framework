@@ -3,6 +3,8 @@
 namespace Datainterface;
 
 use Alerts\Alerts;
+use ConfigurationSetting\ConfigureSetting;
+use Core\Router;
 use Sessions\SessionManager;
 
 class Database
@@ -80,20 +82,43 @@ class Database
    private static $host = "localhost";
 
    public static function database(){
-       $dsn  = "mysql:host=".self::$host.";dbname=".self::$dbname;
+       $dbobj = ConfigureSetting::getDatabaseConfig();
 
        try {
+           if(empty($dbobj)){
+               throw new \Exception("not db data", 100);
+           }
+           self::setHost($dbobj['host']);
+           self::setDbname($dbobj['dbname']);
+           self::setUser($dbobj['user']);
+           self::setPassword($dbobj['password']);
+           $dsn  = "mysql:host=".self::$host.";dbname=".self::$dbname;
            return new \PDO($dsn, self::$user, self::$password);
        }catch (\PDOException $e){
-           echo Alerts::alert('info',$e->getMessage());
-           die();
+
+           if($e->getCode() === 1049){
+             self::makeDatabase();
+           }else{
+               echo Alerts::alert('info',$e->getMessage());
+               die();
+           }
+       }catch (\Exception $ee){
+           if($ee->getCode() === 100){
+
+           }
        }
    }
 
    public static function installer(){
-
+       if(empty(ConfigureSetting::getDatabaseConfig())){
+           SessionManager::setSession('sitenew', true);
+           return;
+       }
        $con = self::database();
 
+       if(empty($con)){
+           $con = Database::database();
+       }
        $maker = new MysqlDynamicTables();
        $columns = ['uid','firstname','lastname','mail','phone','password','address','role','verified','blocked'];
        $attributes = [
@@ -147,6 +172,7 @@ class Database
        }else{
            SessionManager::setSession('site', true);
        }
+
    }
 
    public static function importTable($file){
@@ -155,6 +181,20 @@ class Database
        if(!empty($query)){
           $stmt = $con->prepare($query);
            return $stmt->execute();
+       }
+   }
+
+   public static function makeDatabase(){
+       try {
+           $pdo = new \PDO("mysql:host=".self::$host, self::$user, self::$password);
+           $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+           self::$dbname = "`".str_replace("`","``",self::$dbname)."`";
+           $pdo->query("CREATE DATABASE IF NOT EXISTS ".self::$dbname);
+           $pdo->query("use ".self::$dbname);
+       }
+       catch (\PDOException $e) {
+           die("DB ERROR: " . $e->getMessage());
        }
    }
 }

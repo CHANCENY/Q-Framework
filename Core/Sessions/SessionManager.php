@@ -9,7 +9,7 @@ class SessionManager
    }
 
    public static function getSession($sessionName){
-       return $_SESSION[$sessionName];
+       return isset($_SESSION[$sessionName]) ? $_SESSION[$sessionName] : NULL;
    }
 
    public static function clearSession($sessionName){

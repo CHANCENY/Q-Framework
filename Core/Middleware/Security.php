@@ -51,7 +51,7 @@ class Security extends Globals
            return "U-BLOCK";
        }
 
-       elseif($this->currentUser['verified'] === true){
+       elseif($this->currentUser[0]['verified'] === true){
            return "V-VERIFIED";
        }
        return "U-COMMON";
