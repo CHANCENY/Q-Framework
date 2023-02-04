@@ -30,7 +30,8 @@
             "FileHandler\\": "Core/FileHandler",
             "ApiHandler\\" : "Core/ApiHandler/",
             "ResponseHandler\\" : "Core/ApiHandler/",
-            "Commerce\\": "Core/Commerce/"
+            "Commerce\\": "Core/Commerce/",
+            "Curls\\": "Core/Curl/"
         }
     }
 }

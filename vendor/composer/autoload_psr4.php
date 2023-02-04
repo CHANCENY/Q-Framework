@@ -18,6 +18,7 @@ return array(
     'FormViewCreation\\' => array($baseDir . '/Core/Forms'),
     'FileHandler\\' => array($baseDir . '/Core/FileHandler'),
     'Datainterface\\' => array($baseDir . '/Core/Datainterface'),
+    'Curls\\' => array($baseDir . '/Core/Curl'),
     'CrudClassCollection\\' => array($baseDir . '/Core/Datainterface'),
     'Core\\' => array($baseDir . '/Core/Router/RouterController'),
     'ConfigurationSetting\\' => array($baseDir . '/Core/ConfigurationSetting'),
