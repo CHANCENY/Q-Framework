@@ -55,4 +55,40 @@ class Globals
       }
 
   }
+
+  public static function method(){
+      return $_SERVER['REQUEST_METHOD'];
+  }
+
+  public static function uri(){
+      return $_SERVER['REQUEST_URI'];
+  }
+
+  public static function root(){
+      return $_SERVER['DOCUMENT_ROOT'];
+  }
+
+  public static function script(){
+      return $_SERVER['SCRIPT_FILENAME'];
+  }
+
+  public static function serverName(){
+      return $_SERVER['SERVER_NAME'];
+  }
+
+  public static function port(){
+      return $_SERVER['SERVER_PORT'];
+  }
+
+  public static function address(){
+      return $_SERVER['SERVER_ADDR'];
+  }
+
+  public static function protocal(){
+      return isset($_SERVER['HTTPS']) ? 'https' : 'http';
+  }
+
+  public static function serverHost(){
+      return $_SERVER['HTTP_HOST'];
+  }
 }

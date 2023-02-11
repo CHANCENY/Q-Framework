@@ -1,1 +1,155 @@
-[{"view_name":"View creation","view_url":"creating-view","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/create.view.php","view_path_relative":"/Views/DefaultViews/create.view.php","view_timestamp":1674736349,"view_description":"view creation page view","view_role_access":"administrator"},{"view_name":"Profile","view_url":"profile","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/profile.view.php","view_path_relative":"/Views/DefaultViews/profile.view.php","view_timestamp":1674750166,"view_description":"This is where user will be using to view they profile","view_role_access":"administrator"},{"view_name":"DOM manipulator view","view_url":"dom-manipulator","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/dom-maniputor.view.php","view_path_relative":"/Views/DefaultViews/dom-maniputor.view.php","view_timestamp":1674751140,"view_description":"This will be recieving all XMLRequest calls and render respond data","view_role_access":"private"},{"view_name":"Listing views","view_url":"my-views","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/listing-views.views.php","view_path_relative":"/Views/DefaultViews/listing-views.views.php","view_timestamp":1674753278,"view_description":"This view will be used to display all views registered in thesystem","view_role_access":"administrator"},{"view_name":"Registration","view_url":"registration","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/Registration.view.php","view_path_relative":"/Views/DefaultViews/Registration.view.php","view_timestamp":1674843168,"view_description":"This page will be used to register users","view_role_access":"public"},{"view_name":"landing page","view_url":"landing","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/index.view.php","view_path_relative":"/Views/DefaultViews/index.view.php","view_timestamp":1674989608,"view_description":"home page","view_role_access":"public"},{"view_name":"login page","view_url":"sign-in","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/signing.in.view.php","view_path_relative":"/Views/DefaultViews/signing.in.view.php","view_timestamp":1674996943,"view_description":"For logging in user","view_role_access":"public"},{"view_name":"Forgot password","view_url":"reset-password","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/forgotpassword.view.php","view_path_relative":"/Views/DefaultViews/forgotpassword.view.php","view_timestamp":1675048517,"view_description":"For changing passwords","view_role_access":"administrator"},{"view_name":"Configuration view","view_url":"configuration-view","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/configurationform.view.php","view_path_relative":"/Views/DefaultViews/configurationform.view.php","view_timestamp":1675190111,"view_description":"This i for view configuration","view_role_access":"private"},{"view_name":"Installation page","view_url":"installation","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/intellation.view.php","view_path_relative":"/Views/DefaultViews/intellation.view.php","view_timestamp":1675356090,"view_description":"This is only for installation","view_role_access":"public"},{"view_name":"Testing form","view_url":"tests","view_path_absolute":"C:/xampp/htdocs/Views/DefaultViews/testingform.view.php","view_path_relative":"/Views/DefaultViews/testingform.view.php","view_timestamp":1675426232,"view_description":"Form to test","view_role_access":"public"},{"view_name":"Porn api","view_url":"porns","view_path_absolute":"C:/xampp/htdocs/Views/porns.view.php","view_path_relative":"/Views/porns.view.php","view_timestamp":1675498850,"view_description":"This is for dult only","view_role_access":"public"}]
+[
+    {
+        "view_name": "View creation",
+        "view_url": "creating-view",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/create.view.php",
+        "view_path_relative": "/Views/DefaultViews/create.view.php",
+        "view_timestamp": 1674736349,
+        "view_description": "view creation page view",
+        "view_role_access": "administrator"
+    },
+    {
+        "view_name": "Profile",
+        "view_url": "profile",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/profile.view.php",
+        "view_path_relative": "/Views/DefaultViews/profile.view.php",
+        "view_timestamp": 1674750166,
+        "view_description": "This is where user will be using to view they profile",
+        "view_role_access": "administrator"
+    },
+    {
+        "view_name": "DOM manipulator view",
+        "view_url": "dom-manipulator",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/dom-maniputor.view.php",
+        "view_path_relative": "/Views/DefaultViews/dom-maniputor.view.php",
+        "view_timestamp": 1674751140,
+        "view_description": "This will be recieving all XMLRequest calls and render respond data",
+        "view_role_access": "private"
+    },
+    {
+        "view_name": "Listing views",
+        "view_url": "my-views",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/listing-views.views.php",
+        "view_path_relative": "/Views/DefaultViews/listing-views.views.php",
+        "view_timestamp": 1674753278,
+        "view_description": "This view will be used to display all views registered in thesystem",
+        "view_role_access": "administrator"
+    },
+    {
+        "view_name": "Registration",
+        "view_url": "registration",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/Registration.view.php",
+        "view_path_relative": "/Views/DefaultViews/Registration.view.php",
+        "view_timestamp": 1674843168,
+        "view_description": "This page will be used to register users",
+        "view_role_access": "public"
+    },
+    {
+        "view_name": "landing page",
+        "view_url": "landing",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/index.view.php",
+        "view_path_relative": "/Views/DefaultViews/index.view.php",
+        "view_timestamp": 1674989608,
+        "view_description": "home page",
+        "view_role_access": "public"
+    },
+    {
+        "view_name": "login page",
+        "view_url": "sign-in",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/signing.in.view.php",
+        "view_path_relative": "/Views/DefaultViews/signing.in.view.php",
+        "view_timestamp": 1674996943,
+        "view_description": "For logging in user",
+        "view_role_access": "public"
+    },
+    {
+        "view_name": "Forgot password",
+        "view_url": "reset-password",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/forgotpassword.view.php",
+        "view_path_relative": "/Views/DefaultViews/forgotpassword.view.php",
+        "view_timestamp": 1675048517,
+        "view_description": "For changing passwords",
+        "view_role_access": "administrator"
+    },
+    {
+        "view_name": "Configuration view",
+        "view_url": "configuration-view",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/configurationform.view.php",
+        "view_path_relative": "/Views/DefaultViews/configurationform.view.php",
+        "view_timestamp": 1675190111,
+        "view_description": "This i for view configuration",
+        "view_role_access": "private"
+    },
+    {
+        "view_name": "Installation page",
+        "view_url": "installation",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/intellation.view.php",
+        "view_path_relative": "/Views/DefaultViews/intellation.view.php",
+        "view_timestamp": 1675356090,
+        "view_description": "This is only for installation",
+        "view_role_access": "public"
+    },
+    {
+        "view_name": "Testing form",
+        "view_url": "tests",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/testingform.view.php",
+        "view_path_relative": "/Views/DefaultViews/testingform.view.php",
+        "view_timestamp": 1675426232,
+        "view_description": "Form to test",
+        "view_role_access": "public"
+    },
+    {
+        "view_name": "Porn api",
+        "view_url": "porn_cron",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/porns.view.php",
+        "view_path_relative": "/Views/DefaultViews/porns.view.php",
+        "view_timestamp": 1675614493,
+        "view_description": "This is for dult only",
+        "view_role_access": "private"
+    },
+    {
+        "view_name": "Log out page",
+        "view_url": "sign-out",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/logout.view.php",
+        "view_path_relative": "/Views/DefaultViews/logout.view.php",
+        "view_timestamp": 1675614969,
+        "view_description": "This is sign out page",
+        "view_role_access": "administrator"
+    },
+    {
+        "view_name": "Page not found",
+        "view_url": "404",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/404.view.html",
+        "view_path_relative": "/Views/DefaultViews/404.view.html",
+        "view_timestamp": 1675700296,
+        "view_description": "404 page to load when view requested to not found",
+        "view_role_access": "public"
+    },
+    {
+        "view_name": "Server error",
+        "view_url": "500",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/500.view.html",
+        "view_path_relative": "/Views/DefaultViews/500.view.html",
+        "view_timestamp": 1675792025,
+        "view_description": "For  server error response",
+        "view_role_access": "public"
+    },
+    {
+        "view_name": "Views backup",
+        "view_url": "backup-views",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/createbackup.view.php",
+        "view_path_relative": "/Views/DefaultViews/createbackup.view.php",
+        "view_timestamp": 1675956868,
+        "view_description": "For making backup of your views in case deleted",
+        "view_role_access": "administrator"
+    },
+    {
+        "view_name": "Extend",
+        "view_url": "install",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/extend.view.php",
+        "view_path_relative": "/Views/DefaultViews/extend.view.php",
+        "view_timestamp": 1676098604,
+        "view_description": "This is for extending with your custom php code",
+        "view_role_access": "administrator"
+    }
+]

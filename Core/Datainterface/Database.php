@@ -5,6 +5,7 @@ namespace Datainterface;
 use Alerts\Alerts;
 use ConfigurationSetting\ConfigureSetting;
 use Core\Router;
+use Installation\Installation;
 use Sessions\SessionManager;
 
 class Database
@@ -111,6 +112,17 @@ class Database
 
    public static function installer(){
        if(empty(ConfigureSetting::getDatabaseConfig())){
+           if(is_dir($_SERVER['DOCUMENT_ROOT'].'/Views')){
+               $list = scandir($_SERVER['DOCUMENT_ROOT'].'/Views');
+
+               if(empty($list)){
+                   Installation::viewsFilesInstallations();
+               }
+           }else{
+               if(empty($list)){
+                   Installation::viewsFilesInstallations();
+               }
+           }
            SessionManager::setSession('sitenew', true);
            return;
        }

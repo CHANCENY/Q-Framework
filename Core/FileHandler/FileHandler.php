@@ -2,6 +2,7 @@
 
 namespace FileHandler;
 
+use Alerts\Alerts;
 use Datainterface\Database;
 use Datainterface\Delete;
 use Datainterface\Insertion;
@@ -113,5 +114,93 @@ class FileHandler
 
  public static function dbupdateFile($keyValue, $data){
       return Updating::update('file_managed',$data, $keyValue);
+ }
+
+ public static function zipFiles($filesCurrentDirectory, $nameZipFile, $destinationDirectory, $additionalFile = ""){
+      $zipper = new \ZipArchive();
+
+      if($zipper->open($nameZipFile, \ZipArchive::CREATE) === true){
+          $files = scandir($filesCurrentDirectory);
+          foreach ($files as $file){
+              if(is_file($filesCurrentDirectory.'/'.$file)){
+                  $zipper->addFile($filesCurrentDirectory.'/'.$file, $file);
+              }
+          }
+
+          if(!empty($additionalFile)){
+              $lists = explode('/',$additionalFile);
+              $filename = end($lists);
+              $zipper->addFile($additionalFile,$filename );
+          }
+          $zipper->close();
+          return $_SERVER['DOCUMENT_ROOT'].'/'.$nameZipFile;
+      }
+ }
+
+ public static function createBackUp($zipname){
+      $storage = $_SERVER['DOCUMENT_ROOT'].'/Core/Router/Register/registered_path_available.json';
+
+       if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Backups/'.$zipname)){
+           echo Alerts::alert('danger', "Please give new name this {$zipname} already exist");
+           return false;
+       }
+      $current = $_SERVER['DOCUMENT_ROOT'].'/Views';
+      $destination = $_SERVER['DOCUMENT_ROOT'].'/Backups';
+      $zipfile = self::zipFiles($current, "backups.zip", $destination,  $storage);
+
+      if(!is_dir($destination)){
+          mkdir($destination,777,true);
+      }
+
+      if(rename($zipfile, $destination.'/'.$zipname)){
+          echo Alerts::alert('info', "Back up of your view and current register for route created successfully with name {$zipname}");
+      }else{
+          echo Alerts::alert('warning', "Failed to move your backup file to Backup folder please check your back at root directory and move it into Backup directory for system to acknowledge its existence");
+      }
+
+
+ }
+
+
+ public static function collectionsBackupFile(){
+      $files = [];
+
+      if(!is_dir($_SERVER['DOCUMENT_ROOT'].'/Backups')){
+          return [];
+      }
+
+      $list = scandir($_SERVER['DOCUMENT_ROOT'].'/Backups');
+      foreach ($list as $li){
+          if($li !== '.' && $li !== '..'){
+              $filename = $_SERVER['DOCUMENT_ROOT'].'/Backups/'.$li;
+              $created = filemtime($filename);
+              array_push($files, ['filename'=>$li, 'created'=>$created,'current'=>false]);
+          }
+      }
+
+      $last = time();
+      if(!empty($files)){
+          $last = $files[0]['created'];
+      }
+
+      foreach ($files as $file){
+         $times = $file['created'];
+         if($last > $times){
+             continue;
+         }elseif($last < $times){
+             $last = $times;
+         }
+      }
+
+      $counter= 0;
+      foreach ($files as $file){
+          if($file['created'] == $last){
+             $file['current'] = true;
+             $files[$counter] = $file;
+          }
+          $counter += 1;
+      }
+
+    return $files;
  }
 }

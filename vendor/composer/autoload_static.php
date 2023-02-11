@@ -45,6 +45,7 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         ),
         'C' => 
         array (
+            'CustomInstallation\\' => 19,
             'Curls\\' => 6,
             'CrudClassCollection\\' => 20,
             'Core\\' => 5,
@@ -107,6 +108,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'Datainterface\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Datainterface',
+        ),
+        'CustomInstallation\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/CustomInstallation',
         ),
         'Curls\\' => 
         array (

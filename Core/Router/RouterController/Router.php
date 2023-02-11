@@ -118,6 +118,12 @@ class Router
                 if($item['view_url'] === $viewData['url']) {
                     return "Ensure url is unique and try again";
                 }
+
+                $listed = explode('/', $viewData['url']);
+                $vlist = explode('/', $item['view_url']);
+                if(in_array($vlist[0], $listed)){
+                    return "Ensure that first from hostname in url is unique your clean url";
+                }
             }
 
             array_push($listAssoc, $viewFormat);
@@ -182,6 +188,7 @@ class Router
             if (SessionManager::getSession('site') === false) {
                 $path = 'registration';
             }
+
             $storage = 'Core/Router/Register/registered_path_available.json';
             $foundView = [];
             if (file_exists($storage)) {
@@ -214,8 +221,9 @@ class Router
                             if ($user === "U-Admin") {
                                 $_SESSION['access']['role'] = 1;
                                 self::requiringFile($foundView);
-                            } elseif ($user === "U-BLOCKED") {
-                                $_SESSION['message']['route'] = "Sorry your account is blocked by authority if this is misunderstand please contact administrator";
+                            } elseif ($user === "U-BLOCK") {
+                                echo Alerts::alert('danger', "Sorry your account is blocked by authority if this is misunderstand please contact administrator");
+                                exit;
                             } elseif ($user === "V-VERIFIED") {
                                 self::requiringFile($foundView);
                             } else {
@@ -229,6 +237,13 @@ class Router
                     }
                 } else {
                     if ($path === '/' || empty($path)) {
+                        $security = new Security();
+                        $user = $security->checkCurrentUser();
+
+                        if($user == 'U-BLOCK'){
+                            echo Alerts::alert('danger', "Sorry your account is blocked by authority if this is misunderstand please contact administrator");
+                            exit;
+                        }
                         $foundView = self::findHomePage();
                         if (!empty($foundView)) {
                             self::requiringFile($foundView);
@@ -236,7 +251,12 @@ class Router
                             $_SESSION['message']['route'] = "404 view not found with url ({$path} ) in system visit <a href='creating-view'>Create view</a> also you can view list of all your views registered visit <a href='my-views'>Views list</a>";
                         }
                     } else {
-                        $_SESSION['message']['route'] = "404 view not found with url ({$path} ) in system visit <a href='creating-view'>Create view</a> also you can view list of all your views registered visit <a href='my-views'>Views list</a>";
+                        $result = self::findParamsCleanUrl($path, $views);
+                        if($result !== false){
+                           self::requiringFile($result);
+                        }else{
+                            $_SESSION['message']['route'] = "404 view not found with url ({$path} ) in system visit <a href='creating-view'>Create view</a> also you can view list of all your views registered visit <a href='my-views'>Views list</a>";
+                        }
                     }
                 }
 
@@ -368,6 +388,83 @@ class Router
                     unlink($completePath);
                     return "Failed to update view";
                 }
+        }
+    }
+
+    public static function errorPages($code){
+        $storage = $_SERVER['DOCUMENT_ROOT'].'/Core/Router/Register/registered_path_available.json';
+        $views = json_decode(file_get_contents($storage), true);
+        switch ($code){
+            case 404:
+                $foundViews = [];
+                foreach ($views as $view){
+                    if($view['view_url'] === '404'){
+                        $foundViews = $view;
+                        break;
+                    }
+                }
+                self::requiringFile($foundViews);
+                break;
+            case 500:
+                $foundViews = [];
+                foreach ($views as $view){
+                    if($view['view_url'] === '500'){
+                        $foundViews = $view;
+                        break;
+                    }
+                }
+                self::requiringFile($foundViews);
+            default:
+                echo "here";
+        }
+    }
+
+    public static function findParamsCleanUrl($url, $views){
+
+        $data = [];
+        $flag = false;
+        $queryline = "";
+        $foundView = [];
+        foreach($views as $view){
+            $list = explode('/', $view['view_url']);
+            $urlList = explode('/', $url);
+
+            $urlSize = count($urlList);
+            if($urlSize === count($list)){
+                $firstpart = $urlList[0];
+                if(in_array($firstpart, $list)){
+                    $list = array_slice($list, 1);
+                    $prms = array_slice($urlList, 1);
+
+                    $conter = 0;
+                    foreach ($list as $li){
+                        $element = str_replace('{',' ',$li);
+                        $element = str_replace('}',' ', $element);
+                        $element = trim($element);
+                        $item = [$element=> $prms[$conter]];
+                        $data = array_merge($data, $item);
+                        $queryline .= $element.'='.$prms[$conter].'&';
+                        $conter += 1;
+                    }
+                    $foundView = $view;
+                    //$_SESSION['public_data'][]
+                   $flag = true;
+                }
+            }
+
+            if($flag === true){
+                break;
+            }
+        }
+
+        if($flag === true){
+            $queryline = substr($queryline,0, strlen($queryline) - 1);
+            $_SESSION['public_data']['query']=$queryline;
+            $_SESSION['public_data']['params']=$data;
+            $_SESSION['public_data']['view'] = $foundView;
+            return $foundView;
+        }else{
+            return false;
         }
     }
 }

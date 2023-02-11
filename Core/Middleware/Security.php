@@ -38,8 +38,17 @@ class Security extends Globals
    }
 
    public function checkCurrentUser(){
+
        if(empty($this->currentUser)){
            return "U-NULL";
+       }
+
+       elseif($this->currentUser[0]['blocked'] === 1){
+           return "U-BLOCK";
+       }
+
+       elseif($this->currentUser[0]['verified'] === 1){
+           return "V-VERIFIED";
        }
 
        //check role
@@ -47,13 +56,6 @@ class Security extends Globals
            return "U-Admin";
        }
 
-       elseif($this->currentUser[0]['blocked'] === true){
-           return "U-BLOCK";
-       }
-
-       elseif($this->currentUser[0]['verified'] === true){
-           return "V-VERIFIED";
-       }
        return "U-COMMON";
    }
 }
