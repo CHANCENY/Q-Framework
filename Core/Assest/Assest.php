@@ -49,4 +49,45 @@ class Assest
            }
        }
    }
+
+   public static function loadJavaScriptByFileName($filename){
+
+       $base = $_SERVER['DOCUMENT_ROOT'].'/Js';
+       $foundFiles = [];
+       if(is_dir($base)){
+           $list = scandir($base);
+
+           foreach ($list as $file){
+               if($filename === $file){
+                   $foundFiles[] = 'Js/' . $file;
+               }
+           }
+       }
+
+       if(!empty($foundFiles)){
+           foreach ($foundFiles as $file){
+               echo "<script src='{$file}'></script>";
+           }
+       }
+   }
+
+   public static function loadStyleSheetByFilename($filename){
+       $base = $_SERVER['DOCUMENT_ROOT'].'/Css';
+       $foundFiles = [];
+       if(is_dir($base)){
+           $list = scandir($base);
+
+           foreach ($list as $file){
+               if($filename === $file){
+                   $foundFiles[] = 'Css/' . $file;
+               }
+           }
+       }
+
+       if(!empty($foundFiles)){
+           foreach ($foundFiles as $file){
+               echo "<link rel='stylesheet' href='{$file}'>";
+           }
+       }
+   }
 }
