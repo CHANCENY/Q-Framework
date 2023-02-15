@@ -65,12 +65,20 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                                      if($view['view_role_access'] === 'public'){
                                          $option = "<option value='public'>Public</option>
                                                     <option value='private'>Private</option>
+                                                    <option value='moderator'>Moderator</option>
                                                     <option value='administrator'>Administrator</option>";
                                      }elseif ($view['view_role_access'] === 'private'){
                                          $option = "<option value='private'>Private</option>
                                                    <option value='public'>Public</option>
+                                                    <option value='moderator'>Moderator</option>
                                                    <option value='administrator'>Administrator</option>";
-                                     }else{
+                                     }elseif($view['view_role_access'] === "moderator"){
+                                         $option = "<option value='moderator'>Moderator</option>
+                                                    <option value='private'>Private</option>
+                                                   <option value='public'>Public</option>                                        
+                                                   <option value='administrator'>Administrator</option>";
+                                     }
+                                     else{
                                          $option = "<option value='administrator'>Administrator</option>
                                                     <option value='private'>Private</option>
                                                    <option value='public'>Public</option>

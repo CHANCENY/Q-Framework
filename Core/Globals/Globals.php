@@ -91,4 +91,18 @@ class Globals
   public static function serverHost(){
       return $_SERVER['HTTP_HOST'];
   }
+
+  public static function post($postKey){
+    if(isset($_POST[$postKey])){
+        return $_POST[$postKey];
+    }
+    return false;
+  }
+
+  public static function get($getKey){
+    if(isset($_GET[$getKey])){
+        return $_GET[$getKey];
+    }
+    return false;
+  }
 }

@@ -35,6 +35,10 @@ class Security extends Globals
        if(in_array('administrator', $values)){
            return "V-PRIVATE";
        }
+
+       if(in_array('moderator', $values)){
+           return "V-MODERATOR";
+       }
    }
 
    public function checkCurrentUser(){
@@ -47,15 +51,18 @@ class Security extends Globals
            return "U-BLOCK";
        }
 
-       elseif($this->currentUser[0]['verified'] === 1){
-           return "V-VERIFIED";
-       }
-
        //check role
        elseif($this->currentUser[0]['role'] === "Admin"){
            return "U-Admin";
        }
 
+       elseif($this->currentUser[0]['verified'] === 1){
+           return "V-VERIFIED";
+       }
+
+      elseif (isset($this->currentView['view_role_access']) && $this->currentView['view_role_access'] === "moderator"){
+          return "V-VERIFIED";
+      }
        return "U-COMMON";
    }
 }

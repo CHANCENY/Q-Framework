@@ -217,19 +217,11 @@ class Router
                         if ($access === "V-NULL") {
                             $_SESSION['message']['route'] = "Page looking for is unreachable at moment";
                         } elseif ($access === "V-PRIVATE") {
-                            $user = $security->checkCurrentUser();
-                            if ($user === "U-Admin") {
-                                $_SESSION['access']['role'] = 1;
-                                self::requiringFile($foundView);
-                            } elseif ($user === "U-BLOCK") {
-                                echo Alerts::alert('danger', "Sorry your account is blocked by authority if this is misunderstand please contact administrator");
-                                exit;
-                            } elseif ($user === "V-VERIFIED") {
-                                self::requiringFile($foundView);
-                            } else {
-                                $_SESSION['message']['route'] = "Page is private your are not allowed here";
-                            }
-                        } else {
+                           self::accessAuthenticate($foundView, $security);
+                        }elseif ($access === "V-MODERATOR"){
+                            self::accessAuthenticate($foundView, $security);
+                        }
+                        else {
                             self::requiringFile($foundView);
                         }
                     } else {
@@ -465,6 +457,22 @@ class Router
             return $foundView;
         }else{
             return false;
+        }
+    }
+
+    public static function accessAuthenticate($foundView, $securityClass){
+        $user = $securityClass->checkCurrentUser();
+        if ($user === "U-Admin") {
+            $_SESSION['access']['role'] = 1;
+            self::requiringFile($foundView);
+        } elseif ($user === "U-BLOCK") {
+            echo Alerts::alert('danger', "Sorry your account is blocked by authority if this is misunderstand please contact administrator");
+            exit;
+        } elseif ($user === "V-VERIFIED") {
+            self::requiringFile($foundView);
+        } 
+        else {
+            $_SESSION['message']['route'] = "Page is private your are not allowed here";
         }
     }
 }
