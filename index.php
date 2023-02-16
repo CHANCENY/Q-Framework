@@ -2,22 +2,35 @@
 namespace index;
 require_once  __DIR__.'/vendor/autoload.php';
 
-use Alerts\Alerts;
-use Assest\Assest;
-use Commerce\Commerce;
-use ConfigurationSetting\ConfigureSetting;
 use Core\Router;
-use CustomInstallation\CustomInstallation;
-use Datainterface\Database;
+use Commerce\Commerce;
 use Datainterface\Tables;
-use FileHandler\FileHandler;
+use Datainterface\Database;
+use GlobalsFunctions\Globals;
+use ApiHandler\ApiHandlerClass;
 use MiddlewareSecurity\Security;
+use ConfigurationSetting\ConfigureSetting;
 
 
 
 
 @session_start();
 
+try{
+    $content = ApiHandlerClass::findHeaderValue('Content-Type');
+    if($content === "application/json"){
+        $url = Globals::uri();
+        $parseurl = parse_url($url, PHP_URL_PATH);
+        $parseurl = substr($parseurl, 1 , strlen($parseurl));
+        $view = Globals::findViewByUrl($parseurl);
+        if(!empty($view)){
+            Router::requiringFile($view);
+        }
+        exit;
+    }
+}catch(\Exception $e){
+ Router::errorPages(500);
+}
 //CustomInstallation::writeComposerFile('h','h');
 
 try{
@@ -64,6 +77,7 @@ try{
          * Routing is happing from here Router::router();
          */
         try{
+            
             Router::router(true);
             if(isset($_SESSION['message']['route']) && !empty($_SESSION['message']['route'])){
                 Router::errorPages(404);
@@ -75,9 +89,8 @@ try{
 
         ?>
     </div>
-    <?php
-      Assest::loadJavaScript("js");
-    ?>
+    <script src="Js/main.js"></script>
+    <script src="Js/addressing.js"></script>
 </main>
 <?php
 

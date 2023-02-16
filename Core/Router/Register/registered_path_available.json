@@ -151,5 +151,14 @@
         "view_timestamp": 1676098604,
         "view_description": "This is for extending with your custom php code",
         "view_role_access": "administrator"
+    },
+    {
+        "view_name": "Address handler",
+        "view_url": "addressing-handler",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/addressing.view.php",
+        "view_path_relative": "/Views/DefaultViews/addressing.view.php",
+        "view_timestamp": 1676564849,
+        "view_description": "Address handler for javascript",
+        "view_role_access": "public"
     }
 ]
