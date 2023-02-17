@@ -11,7 +11,9 @@ use ApiHandler\ApiHandlerClass;
 use MiddlewareSecurity\Security;
 use ConfigurationSetting\ConfigureSetting;
 
-
+// enable these two line to show error on web page
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 
 
 @session_start();

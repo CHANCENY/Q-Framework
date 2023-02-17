@@ -17,6 +17,8 @@ class FileHandler
       if(!is_dir($path)){
          mkdir($path, 777);
       }
+
+      $home = isset($_SERVER['HTTPS']) ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
       switch ($type){
           case 'tmp':
               $content = file_get_contents($data);
@@ -27,7 +29,7 @@ class FileHandler
                   goto top;
               }else{
                   if(file_put_contents($path.'/'.$filename, $content)){
-                      return $path.'/'.$filename;
+                      return $home.'/Files/'.$filename;
                   }
               }
           case 'binary':
@@ -38,7 +40,7 @@ class FileHandler
                   goto tops;
               }else{
                   if(file_put_contents($path.'/'.$filename, $data)){
-                      return $path.'/'.$filename;
+                    return $home.'/Files/'.$filename;
                   }
               }
           default:
@@ -93,19 +95,19 @@ class FileHandler
   }
 
  public static function dbSavingFile($data){
-      $con = Database::database();
-      $columns = ['fid', 'filename','filesize','tmp'];
-      $attributes = [
-          'fid'=>['INT(11)','AUTO_INCREMENT','PRIMARY KEY'],
-          'filename'=>['VARCHAR(100)','NULL'],
-          'filesize'=>['INT(11)', 'NULL'],
-          'tmp'=>['LONG','BLOB']
-      ];
-
-      $maker = new MysqlDynamicTables();
-      $maker->resolver($con,$columns,$attributes,'file_managed',false);
-
-      return Insertion::insertRow('file_managed', $data);
+        $con = Database::database();
+        $columns = ['fid', 'filename','filesize','fileurl','target_id'];
+        $attributes = [
+            'fid'=>['INT(11)','AUTO_INCREMENT','PRIMARY KEY'],
+            'filename'=>['VARCHAR(100)','NULL'],
+            'filesize'=>['INT(11)', 'NULL'],
+            'fileurl'=>['VARCHAR(250)','NULL'],
+            'target_id'=>['INT(11)','NOT NULL']
+        ];
+        $maker = new MysqlDynamicTables();
+        $maker->resolver($con,$columns,$attributes,'file_managed',false);
+  
+        return Insertion::insertRow('file_managed', $data);
  }
 
  public static function dbdeleteFile($keyValue){

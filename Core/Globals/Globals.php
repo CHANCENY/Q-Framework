@@ -105,4 +105,8 @@ class Globals
     }
     return false;
   }
+
+  public static function files($fileKey){
+    return $_FILES[$fileKey];
+  }
 }
