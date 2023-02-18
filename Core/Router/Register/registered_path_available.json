@@ -160,5 +160,23 @@
         "view_timestamp": 1676564849,
         "view_description": "Address handler for javascript",
         "view_role_access": "public"
+    },
+    {
+        "view_name": "People",
+        "view_url": "users",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/users.view.php",
+        "view_path_relative": "/Views/DefaultViews/users.view.php",
+        "view_timestamp": 1676705745,
+        "view_description": "This is for users display",
+        "view_role_access": "administrator"
+    },
+    {
+        "view_name": "User Command Api",
+        "view_url": "users-commands",
+        "view_path_absolute": "C:/xampp/htdocs/Views/DefaultViews/users.commands.view.php",
+        "view_path_relative": "/Views/DefaultViews/users.commands.view.php",
+        "view_timestamp": 1676714828,
+        "view_description": "This is for admin only",
+        "view_role_access": "private"
     }
 ]

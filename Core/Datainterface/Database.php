@@ -150,31 +150,31 @@ class Database
 
        try{
            $conn = self::database();
-           $stmt = $conn->prepare("SELECT 1 FROM tbl_cities LIMIT 1");
+           $stmt = $conn->prepare("SELECT 1 FROM cities LIMIT 1");
            $stmt->execute();
        }catch (\Exception $e){
-
-         $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/tbl_cities.sql';
+         
+         $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/cities.sql';
          self::importTable($path);
        }
 
        try{
            $conn = self::database();
-           $stmt = $conn->prepare("SELECT 1 FROM tbl_countries LIMIT 1");
+           $stmt = $conn->prepare("SELECT 1 FROM countries LIMIT 1");
            $stmt->execute();
        }catch (\Exception $e){
 
-           $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/tbl_countries.sql';
+           $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/countries.sql';
            self::importTable($path);
        }
 
        try{
            $conn = self::database();
-           $stmt = $conn->prepare("SELECT 1 FROM tbl_states LIMIT 1");
+           $stmt = $conn->prepare("SELECT 1 FROM states LIMIT 1");
            $stmt->execute();
        }catch (\Exception $e){
 
-           $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/tbl_states.sql';
+           $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/states.sql';
            self::importTable($path);
        }
 

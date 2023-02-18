@@ -109,4 +109,8 @@ class Globals
   public static function files($fileKey){
     return $_FILES[$fileKey];
   }
+
+  public static function redirect($destination){
+      echo '<META HTTP-EQUIV="Refresh" Content="1; URL="'.$destination.'>';
+  }
 }
