@@ -3,6 +3,7 @@
 namespace FormViewCreation;
 @session_start();
 use Datainterface\Selection;
+use Sessions\SessionManager;
 
 /**
  * This class is only for login and logout process
@@ -26,7 +27,8 @@ class Logging
        }
 
        if($password === $user[0]['password']){
-           $_SESSION['private_data']['current_user'] = $user;
+           session_regenerate_id();
+           SessionManager::setNamespacedSession($user, "private_data","current_user");
            return true;
        }else{
            return false;
@@ -35,7 +37,7 @@ class Logging
 
    public static function signingOut(){
        if(isset( $_SESSION['private_data']['current_user'])){
-           $_SESSION['private_data']['current_user'] = array();
+           SessionManager::setNamespacedSession([], "private_data","current_user");
            return true;
        }
        return false;

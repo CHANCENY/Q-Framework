@@ -94,14 +94,14 @@ class Globals
 
   public static function post($postKey){
     if(isset($_POST[$postKey])){
-        return $_POST[$postKey];
+        return htmlspecialchars(strip_tags($_POST[$postKey]));
     }
     return false;
   }
 
   public static function get($getKey){
     if(isset($_GET[$getKey])){
-        return $_GET[$getKey];
+        return htmlspecialchars(strip_tags($_GET[$getKey]));
     }
     return false;
   }

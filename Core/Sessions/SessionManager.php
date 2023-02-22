@@ -32,4 +32,12 @@ class SessionManager
        return $_SESSION;
    }
 
+   public static function setNamespacedSession($data, $namespace, $identity){
+       $_SESSION[$namespace][$identity] = $data;
+   }
+
+   public static function getNamespacedSession($namespace , $identity){
+       return $_SESSION[$namespace][$identity];
+   }
+
 }
