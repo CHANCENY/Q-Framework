@@ -5,19 +5,19 @@ namespace ApiHandler;
 class ApiHandlerClass
 {
     public static function headersRequest(){
-        return http_get_request_headers();
+        return getallheaders();
 
     }
 
     public static function findHeaderValue($headerType){
-        $headers = http_get_request_headers();
+        $headers = getallheaders();
 
         if(empty($headers)){
             return NULL;
         }
 
-        foreach ($headers as $header=>$value){
-            if(isset($header[$headerType]) && !empty($header[$headerType])){
+        foreach ($headers as $headerss=>$value){
+            if($headerss === $headerType){
                 return $value;
             }
         }

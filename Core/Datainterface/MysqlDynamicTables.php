@@ -128,35 +128,11 @@ class MysqlDynamicTables
      */
     private function runSql($sql){
         //Code to run sql and make table in db
-        if($this->tableExist() === false){
-            $stmtss = $this->connection->prepare($sql);
-            if($stmtss->execute()){
-                return true;
-            }
+        $stmtss = $this->connection->prepare($sql);
+        if($stmtss->execute()){
+            return true;
+        }
             return false;
-        }
-    }
-
-    /**
-     * table exist
-     */
-    public function tableExist(){
-
-        $sl = "SHOW TABLES FROM epiz_33271157_storagecollection";
-        $stmt = $this->connection->prepare($sl);
-        if($stmt->execute()){
-
-            $d = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-            if(!empty($d)){
-                foreach($d as $t){
-                    extract($t);
-                    if($Tables_in_epiz_33271157_storagecollection === $this->tableName){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
 
     }
 

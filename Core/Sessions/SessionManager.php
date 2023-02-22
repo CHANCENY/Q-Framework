@@ -9,7 +9,7 @@ class SessionManager
    }
 
    public static function getSession($sessionName){
-       return $_SESSION[$sessionName];
+       return isset($_SESSION[$sessionName]) ? $_SESSION[$sessionName] : NULL;
    }
 
    public static function clearSession($sessionName){
@@ -30,6 +30,14 @@ class SessionManager
 
    public static function sessions(){
        return $_SESSION;
+   }
+
+   public static function setNamespacedSession($data, $namespace, $identity){
+       $_SESSION[$namespace][$identity] = $data;
+   }
+
+   public static function getNamespacedSession($namespace , $identity){
+       return $_SESSION[$namespace][$identity];
    }
 
 }

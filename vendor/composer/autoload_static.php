@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit1dba5613abded84caabc95765f21e30a
 {
     public static $prefixLengthsPsr4 = array (
+        'U' => 
+        array (
+            'UI\\' => 3,
+        ),
         'S' => 
         array (
             'Sessions\\' => 9,
@@ -28,7 +32,7 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         ),
         'I' => 
         array (
-            'Installer\\' => 10,
+            'Installation\\' => 13,
         ),
         'G' => 
         array (
@@ -45,6 +49,8 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         ),
         'C' => 
         array (
+            'CustomInstallation\\' => 19,
+            'Curls\\' => 6,
             'CrudClassCollection\\' => 20,
             'Core\\' => 5,
             'ConfigurationSetting\\' => 21,
@@ -59,6 +65,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
     );
 
     public static $prefixDirsPsr4 = array (
+        'UI\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/UI',
+        ),
         'Sessions\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Sessions',
@@ -87,9 +97,9 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/Mailling',
         ),
-        'Installer\\' => 
+        'Installation\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/Core/Installer',
+            0 => __DIR__ . '/../..' . '/Core/Installation',
         ),
         'GlobalsFunctions\\' => 
         array (
@@ -106,6 +116,14 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'Datainterface\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Datainterface',
+        ),
+        'CustomInstallation\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/CustomInstallation',
+        ),
+        'Curls\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Curl',
         ),
         'CrudClassCollection\\' => 
         array (

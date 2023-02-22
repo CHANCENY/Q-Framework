@@ -33,19 +33,84 @@ class Globals
   public static function menus(){
 
       $menus = [];
-     foreach ($_SESSION['viewsstorage'] as $view){
-         if($view['view_role_access'] === 'administrator'){
-            $menus[] = $view;
-         }
-     }
+      if(isset($_SESSION['viewsstorage'])){
+          foreach ($_SESSION['viewsstorage'] as $view){
+              if($view['view_role_access'] === 'administrator'){
+                  $menus[] = $view;
+              }
+          }
+      }
+
      return $menus;
   }
 
   public static function findViewByUrl($url){
-      foreach ($_SESSION['viewsstorage'] as $view){
-          if($view['view_url'] === $url){
-              return $view;
+
+      if(isset($_SESSION['viewsstorage'])){
+          foreach ($_SESSION['viewsstorage'] as $view){
+              if($view['view_url'] === $url){
+                  return $view;
+              }
           }
       }
+
+  }
+
+  public static function method(){
+      return $_SERVER['REQUEST_METHOD'];
+  }
+
+  public static function uri(){
+      return $_SERVER['REQUEST_URI'];
+  }
+
+  public static function root(){
+      return $_SERVER['DOCUMENT_ROOT'];
+  }
+
+  public static function script(){
+      return $_SERVER['SCRIPT_FILENAME'];
+  }
+
+  public static function serverName(){
+      return $_SERVER['SERVER_NAME'];
+  }
+
+  public static function port(){
+      return $_SERVER['SERVER_PORT'];
+  }
+
+  public static function address(){
+      return $_SERVER['SERVER_ADDR'];
+  }
+
+  public static function protocal(){
+      return isset($_SERVER['HTTPS']) ? 'https' : 'http';
+  }
+
+  public static function serverHost(){
+      return $_SERVER['HTTP_HOST'];
+  }
+
+  public static function post($postKey){
+    if(isset($_POST[$postKey])){
+        return htmlspecialchars(strip_tags($_POST[$postKey]));
+    }
+    return false;
+  }
+
+  public static function get($getKey){
+    if(isset($_GET[$getKey])){
+        return htmlspecialchars(strip_tags($_GET[$getKey]));
+    }
+    return false;
+  }
+
+  public static function files($fileKey){
+    return $_FILES[$fileKey];
+  }
+
+  public static function redirect($destination){
+      echo '<META HTTP-EQUIV="Refresh" Content="1; URL="'.$destination.'>';
   }
 }

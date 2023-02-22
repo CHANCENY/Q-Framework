@@ -4,9 +4,17 @@
 $menus = \GlobalsFunctions\Globals::menus();
 
 $links = "";
+$sec = new \MiddlewareSecurity\Security();
+$user = $sec->checkCurrentUser();
 foreach ($menus as $menu){
     $m = "<a href='{$menu['view_url']}' class='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>{$menu['view_name']}</a>";
     $links .= $m;
+}
+if($user === "U-NULL"){
+    $links = "";
+}
+if($user === "U-COMMON"){
+    $links = "";
 }
 ?>
 <!doctype html>
@@ -19,7 +27,7 @@ foreach ($menus as $menu){
   <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <?php \Assest\Assest::loadStyleSheets(); ?>
-    <title id="titlepag"><?php echo \GlobalsFunctions\Globals::titleView(); ?></title>
+    <title id="titlepage"><?php echo \GlobalsFunctions\Globals::titleView(); ?></title>
 </head>
 <body class="h-full">
 <!--
@@ -82,14 +90,6 @@ foreach ($menus as $menu){
                   From: "transform opacity-100 scale-100"
                   To: "transform opacity-0 scale-95"
               -->
-              <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a href="profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
-              </div>
             </div>
           </div>
         </div>
